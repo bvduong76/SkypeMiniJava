@@ -1,0 +1,6 @@
+database
+global
+objects
+objects.messages
+objects.room
+socket

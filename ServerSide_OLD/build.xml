@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ServerSide_OLD" basedir="." default="main">
+	<target name="clean">
+        <delete dir="build"/>
+    </target>
+	
+	<target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes">
+			<classpath>
+				<pathelement path="build/classes;src/libs/sqljdbc4.jar"/>
+			</classpath>
+		</javac>
+    </target>
+	
+	<target name="jar" depends="compile">
+        <mkdir dir="build/jar"/>
+		<mkdir dir="build/jar/libs"/>
+		<copy file="src/libs/sqljdbc4.jar" todir="build/jar/src/libs"/>
+        <jar destfile="build/jar/ServerSide_OLD.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="socket.TestServerSocket"/>
+				<attribute name="Class-Path" value="src/libs/sqljdbc4.jar"/>
+            </manifest>
+        </jar>
+		
+    </target>
+	<target name="run" depends="jar">
+        <java jar="build/jar/ServerSide_OLD.jar" fork="true"/>
+    </target>
+	<target name="main" depends="run">
+		
+	</target>
+</project>

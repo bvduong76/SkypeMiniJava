@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ClientSide_OLD" basedir="." default="main">
+	<target name="clean">
+        <delete dir="build"/>
+    </target>
+	
+	<target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" encoding="UTF-8" includeantruntime="false" destdir="build/classes">
+		</javac>
+    </target>
+	
+	
+	<target name="jar" depends="compile">
+        <mkdir dir="build/jar"/>
+		<copy todir="build/classes/view/Images">
+           <fileset dir="src/view/Images"/>
+        </copy>
+        <jar destfile="build/jar/ClientSide_OLD.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="view.demo.Program"/>
+            </manifest>
+        </jar>
+		
+    </target>
+	<target name="run" depends="jar">
+     <java jar="build/jar/ClientSide_OLD.jar" fork="true"/>
+    </target>
+	<target name="main" depends="run">
+		
+	</target>
+</project>
